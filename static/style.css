@@ -1,67 +1,229 @@
-:root {
-  --background-color: #ffffff;
-  --text-color: #000000;
-  --link-color: #0077ff;
-}
-
-[data-theme="dark"] {
-  --background-color: #121212;
-  --text-color: #ffffff;
-  --link-color: #1e90ff;
-}
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&family=Sacramento&family=Ysabeau+SC:wght@1..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&family=Bungee+Inline&family=Sacramento&family=Ysabeau+SC:wght@1..1000&display=swap');
 
 body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
+    color: black;
+    background: rgba(249, 226, 163, 0.55);
 }
 
-a {
-  color: var(--link-color);
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-}
-
-a:hover {
-  text-decoration: underline;
-  transition: color 0.3s;
-}
-
-* {
-  transition: background-color 0.3s, color 0.3s;
-}
-
-#theme-toggle {
-    background-color: #f0f0f0;
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 30px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-#theme-toggle:hover {
-    background-color: #e0e0e0;
-    color: #333;              
-}
-
+/* Estilo do menu principal */
 .menu {
-    /*background: black;*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #121111;
+    color: #fda400;
     display: flex;
     justify-content: center;
-    align-content: center;
-    gap:30px;
-    color: #ffffff;
-    font-family: "Calisto MT",sans-serif;
-    text-decoration-color: none;
-    font-size: 30px;
-    top:0;
-    width: 100%;
-    height: auto;
-
+    gap: 50px;
+    font-family: "Advent Pro", serif;
+    font-weight: 300;
+    font-size: 100px;
+    z-index: 1000;
+    box-shadow: 10px 10px 10px rgb(253, 164, 0);
+    /*border: 7px solid #f8e1a7;*/
 }
 
+/* Estilo dos links do menu */
+.menu a {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 50px;
+    transition: color 0.3s ease; /
+}
+
+/* Estilo dos itens do menu */
+.menu-item {
+    position: relative;
+    color: #ffffff;
+    font-size: 100px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: color 0.3s ease;
+}
+
+
+/* Onda principal (antes do clique) */
+.menu-item::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: #FFA500;
+    border-radius: 70%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+    z-index: -1;
+}
+
+/* Ativar a onda ao clicar */
+.menu-item.active::before {
+    width: 100%;
+    height: 200%;
+    border-radius: 50%;
+}
+
+/* Texto sobre a onda */
+.menu-item.active {
+    color: white;
+    z-index: 1;
+}
+
+/* Onda adicional (detalhe decorativo) */
+.menu-item::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: #FFA500;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+    z-index: -1;
+}
+
+/* Ativar a segunda onda ao clicar */
+.menu-item.active::after {
+    width: 150%;
+    height: 150%;
+    border-radius: 50%;
+}
+
+/* Estilo geral para centralizar conteúdo */
+.sobre {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    /*align-items: center;*/
+    height: auto;
+    margin: auto;
+    top: 100px;
+}
+
+.text-overlay {
+    position: absolute;
+    bottom: 10%;
+    width: 100%; /* Para alinhar o texto ao centro */
+    text-align: center;
+    color: #fda400; /* Cor do texto */
+    font-family: "Advent Pro", serif;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Sombra para destacar o texto */
+}
+
+.text-overlay h1 {
+    font-size: 550px; /* Tamanho do nome */
+    font-weight: 100;
+    margin-bottom: 0;
+}
+
+.text-overlay h2 {
+    font-size: 200px;
+    color: #004e59;
+    font-family: "roboto", sans-serif ;
+}
+
+/* Container da animação */
+.animation-container {
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+}
+
+/* Estilo da imagem */
+.sobre-image1 {
+    width: 1000px;
+    height: auto;
+    z-index: 1;
+    display: block;
+}
+
+/* Símbolos ao redor da imagem */
+.symbol {
+    position: absolute;
+    font-size: 800px;
+    font-weight: bold;
+    color: #FFA500; /* Cor do símbolo */
+    animation: openClose 1.5s infinite ease-in-out; /* Animação de abrir e fechar */
+    z-index: 2; /* Acima da imagem */
+    margin-top: 800px;
+}
+
+/* Símbolo de abertura (<) */
+.symbol.open {
+    top: 10%; /* Ajuste vertical */
+    left: 25%; /* Ajuste horizontal */
+    transform: translate(-50%, -50%);
+}
+
+/* Símbolo de fechamento (>) */
+.symbol.close {
+    top: 10%;
+    right: 20%;
+    transform: translate(50%, -50%);
+}
+
+/* Animação dos símbolos */
+@keyframes openClose {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#sobre {
+    padding: 20px 20px;
+    /*background-color: #fdf5e6; !* Tom suave e acolhedor *!*/
+    color: #333;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0);
+    margin: 20px auto;
+}
+
+#sobre p {
+    font-size: 100px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    margin-top: 200px;
+    font-family: "advent" sans-serif;
+}
+
+#sobre ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+#sobre ul li {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 30px;
+}
+
+#sobre ul li::before {
+    content: '💻';
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#sobre blockquote {
+    font-size: 1rem;
+    font-style: italic;
+    color: #666;
+    border-left: 5px solid #FFA500;
+    padding-left: 15px;
+    margin: 20px auto;
+    font-family: "Georgia", serif;
+}
